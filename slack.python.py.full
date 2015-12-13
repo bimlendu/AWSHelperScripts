@@ -1,0 +1,40 @@
+#!/usr/bin/python
+'''
+POST msg to Slack.
+'''
+import sys
+import requests
+import json
+
+slack_webhook_url = 'https://hooks.slack.com/services/JHGDGGSJGAGD/JHGDGWGD/kjhfkhdfykjhfkjdhsf'
+channel = '#channelName'
+username = 'TheMessenger'
+
+
+message = 'CodeDeploy :: '
+payload = { 'channel': channel,
+            'username': username,
+            'text': message,
+            'icon_url': 'http://img.stackshare.io/service/1888/aws-codedeploy.png',
+            'attachments': [ {
+              'fallback': 'Required plain-text summary of the attachment.',
+              'color': 'danger',
+              'pretext': 'Optional text that appears above the attachment block',
+              'author_name': 'Bobby Tables',
+              'author_link': 'http://flickr.com/bobby/',
+              'author_icon': 'http://cdn.dev.classmethod.jp/wp-content/uploads/2014/11/AWSCodeDeploy-320x320.png',
+              'title': 'Slack API Documentation',
+              'title_link': 'https://api.slack.com/',
+              'text': 'Optional text that appears within the attachment',
+              'fields': [
+                {
+                    'title': 'Priority',
+                    'value': 'High',
+                    'short': 'false'
+                }
+              ],
+              'image_url': 'http://cdn.dev.classmethod.jp/wp-content/uploads/2014/11/AWSCodeDeploy-320x320.png',
+              'thumb_url': 'http://cdn.dev.classmethod.jp/wp-content/uploads/2014/11/AWSCodeDeploy-320x320.png'
+            } ]
+        }
+r = requests.post(slack_webhook_url, data=json.dumps(payload))
